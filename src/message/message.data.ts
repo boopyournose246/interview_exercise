@@ -102,6 +102,25 @@ export class MessageData {
     return deletedMessage; // Minimum to pass ts checks -replace this
   }
 
+  async updateMessageTags(
+    messageId: ObjectID,
+    tags: string[],
+  ): Promise<ChatMessage> {
+    const updatedTagMessage = await this.chatMessageModel.findByIdAndUpdate(
+      messageId,
+      {
+        tags: tags,
+      },
+      {
+        new: true,
+        lean: true,
+      },
+    );
+    if (!updatedTagMessage)
+      throw new Error('The message id to update tag does not exist');
+    return updatedTagMessage;
+  }
+
   async resolve(messageId: ObjectID): Promise<ChatMessage> {
     const filterBy = { _id: messageId };
     const updateProperty = { resolved: true };

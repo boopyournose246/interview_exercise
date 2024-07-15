@@ -138,6 +138,12 @@ export class ChatMessageModel {
   deleted: boolean;
 
   @Prop({
+    type: [String],
+    default: [],
+  })
+  tags?: string[];
+
+  @Prop({
     default: false,
   })
   resolved: boolean;

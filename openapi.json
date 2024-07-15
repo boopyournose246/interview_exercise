@@ -956,6 +956,12 @@
                     "deleted": {
                         "type": "boolean"
                     },
+                    "tags": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
                     "resolved": {
                         "type": "boolean"
                     },

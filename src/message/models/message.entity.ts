@@ -131,6 +131,9 @@ export class ChatMessage {
   @Field({ defaultValue: false })
   deleted: boolean;
 
+  @Field({ defaultValue: [] })
+  tags?: string[];
+
   @Field({ defaultValue: false })
   resolved: boolean;
 
