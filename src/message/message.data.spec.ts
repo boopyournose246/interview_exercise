@@ -151,4 +151,27 @@ describe('MessageData', () => {
       expect(updatedEmptyTagMessage.tags).toEqual(emptyTags);
     });
   });
+
+  describe('findMessagesByTag', () => {
+    it('successfully found messages by a tag', async () => {
+      const conversationId = new ObjectID();
+      const message = await messageData.create(
+        { conversationId, text: 'Message to update tags' },
+        senderId,
+      );
+
+      // Make sure that tags is filled
+      const tags = ['music', 'song'];
+      const updatedTagMessage = await messageData.updateMessageTags(
+        new ObjectID(message.id),
+        tags,
+      );
+      expect(updatedTagMessage.tags).toEqual(tags);
+
+      const tag = tags[0];
+      const messages = await messageData.findMessagesByTag(tag);
+      expect(messages.length).toEqual(1);
+      expect(messages[0].tags).toContain(tag);
+    });
+  });
 });
